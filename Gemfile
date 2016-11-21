@@ -7,7 +7,10 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'faker',                   '1.6.6'
 gem 'will_paginate',           '3.1.0'
 gem 'bootstrap-will_paginate', '0.0.10'
-
+#ckdietor
+gem 'mini_magick'
+gem 'carrierwave'
+gem 'ckeditor'
 #md5
 gem 'bcrypt',         '3.1.11'
 #bootstrap

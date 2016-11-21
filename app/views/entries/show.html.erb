@@ -1,0 +1,16 @@
+<% provide(:title,"Details")%>
+<div class="show_entry">
+	<h1 ><%=@entry.title%></h1>
+	<p class="author">Author :<span>  <%= link_to @entry.user.name ,  @entry.user %></span></p>
+
+	<div class="row">
+		<p class="body_entry" style=""><%=@entry.body%></p>		
+	</div>
+	<span class="timestamp">
+    		Posted <%= time_ago_in_words(@entry.created_at) %> ago.
+  	</span>
+</div>
+<div class="row comment">
+		
+
+</div>
