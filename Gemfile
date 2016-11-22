@@ -8,9 +8,9 @@ gem 'faker',                   '1.6.6'
 gem 'will_paginate',           '3.1.0'
 gem 'bootstrap-will_paginate', '0.0.10'
 #ckdietor
-gem 'mini_magick'
-gem 'carrierwave'
-gem 'ckeditor'
+gem 'carrierwave',             '0.11.2'
+gem 'mini_magick',             '4.5.1'
+gem 'fog',                     '1.38.0'
 #md5
 gem 'bcrypt',         '3.1.11'
 #bootstrap

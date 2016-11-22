@@ -11,8 +11,11 @@ class EntriesController < ApplicationController
 
 	def show
 		@entry = Entry.find(params[:id])
+		@comments=@entry.feed.paginate(:per_page => 5,page: params[:page])
+		@comment= @entry.feed.build if logged_in?
+  	end
 		
-	end
+	
 	private 
 
 	def entry_params

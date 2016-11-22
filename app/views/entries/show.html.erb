@@ -11,6 +11,24 @@
   	</span>
 </div>
 <div class="row comment">
+	<div class="col-md-8 col-md-offset-2">
+    		<% if @comments.any? %>
+      			<h3>Comments (<%=@comments.count%>)</h3>
+      			<ol class="microposts">
+	    			<%= render @comments%>
+			</ol>
+      			<%= will_paginate @comments %>
+    		<% else%>
+    			<h3>Comments (0)</h3>
+    			<p>No comment</p>
+
+    		<%end%>
+        <%if logged_in? && (current_user .following?(@entry.user)||current_user?(@entry.user) )%>
+        	<section class="micropost_form">
+              		<%= render 'shared/comment_form' %>
+            	</section>
+        <%end%>
+  </div>
 		
 
 </div>
