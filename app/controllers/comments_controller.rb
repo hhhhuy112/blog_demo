@@ -7,14 +7,14 @@ class CommentsController < ApplicationController
 			@entry = Entry.find(params[:comment][:entry_id])
 			redirect_to @entry
 		else
-			flash[:danger]="Create comment fail"
+			flash[:danger]="Please Enter comment"
 			@entry = Entry.find(params[:comment][:entry_id])
-			redirect_to @entry
+			redirect_to entry_path(id: @entry.id)
 		end	
 	end
 	private 
 
 	def comment_params
-		params.require(:comment).permit(:content, :entry_id);
+		params.require(:comment).permit(:content, :entry_id)
 	end		
 end

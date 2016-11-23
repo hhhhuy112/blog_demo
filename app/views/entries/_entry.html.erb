@@ -9,7 +9,8 @@
   <span class="action_entry" style="float: right;"> 
     <button  type="button" class="btn btn-primary"><%= link_to "Detail", entry %></button>
     <% if logged_in? &&  current_user?(entry.user)%>
-    <button type="button" class="btn btn-danger"><%= link_to "Delete", "#" %></button>
+    <button type="button" class="btn btn-danger"><%= link_to "delete", entry, method: :delete,
+                                       data: { confirm: "You sure?" } %></button>
     <%end%>
   </span>
   <div style="clear: both;"></div>
