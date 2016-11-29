@@ -19,6 +19,13 @@ class EntriesController < ApplicationController
 		@comment= @entry.feed.build if logged_in?
   	end
 
+  	def showFollow
+    		@title = "Following"
+   		@user  = User.find(params[:id])
+    		@users = @user.following.paginate(page: params[:page])
+    		render 'show_follow'
+  	end
+
   	def destroy
   		@entry.destroy
     		flash[:success] = "Micropost deleted"
