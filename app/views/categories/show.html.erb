@@ -1,0 +1,59 @@
+<% provide(:title,"Details Category")%>
+<div class="show_category">
+  <h1 ><%= link_to @category.name, @category%></h1>
+  <div class="row">
+    <button type="button" class=" btn-question btn btn-success btn-md col-md-2" data-toggle="modal" data-target="#myModal">+ Add question</button>
+
+    <%= form_tag   category_path(@category), method: :get, id: "categories_search", class: "col-md-4 col-md-offset-6" do %>
+
+      <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search" %>
+
+    <% end %>
+
+    <%if @category.questions.any?%>
+
+    <h2 class="number-questions"><%= pluralize(@questions.count, 'Question') %></h2>
+    <div id="questions">
+      <%=render @questions%>
+    </div>
+    <%else%>
+    <p>Please add question</p>
+    <%end%>
+  </div>
+  <div id="pag" class="row">
+      <%= will_paginate @questions, class: "col-md-8 col-md-offset-2"%>
+  </div>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="validate-alert alert alert-info">
+          <strong>Please add answer to submit !</strong>
+        </div>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add question</h4>
+        </div>
+        <div class="modal-body">
+        <%=form_for @category.questions.build, remote: true  do |f|%>
+
+          <div class="form-group">
+            <%=f.hidden_field :category_id, value: @category.id %>
+            <%= f.label :content%><br>
+            <%= f.text_field :content, required: true   %>
+          </div>
+          <h2 class="number-answers">Answer(0)</h2>
+          <div id="areaAnswer" class="row">
+
+          </div>
+        </div>
+        <div class="modal-footer row ">
+        <%= link_to "Add Answer","javascript:void(0)", class: 'duplicate_nested_form btn btn-info col-md-2 col-md-offset-3'%>
+          <%= f.submit "Submit", class: " btn-add-question btn btn-primary col-md-2", disabled: "disabled" %>
+          <button type="button" class="btn-cancel btn btn-default col-md-2" data-dismiss="modal">Close</button>
+        </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

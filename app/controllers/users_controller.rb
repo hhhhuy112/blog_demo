@@ -3,11 +3,12 @@ class UsersController < ApplicationController
   	before_action :admin_user,     only: :destroy
   	before_action :correct_user,   only: [:edit, :update]
   	def index
-  		@users=User.paginate(page: params[:page])		
-  	end	
+  		@users=User.paginate(page: params[:page])
+  	end
 
   	def new
-  		@user=User.new 
+  		@user=User.new
+      debugger
   	end
 
   	def show
@@ -27,9 +28,9 @@ class UsersController < ApplicationController
   	end
 
   	def edit
-  		@user = User.find(params[:id]) 
+  		@user = User.find(params[:id])
   	end
-  	
+
   	def update
     		@user = User.find(params[:id])
     		if @user.update_attributes(user_params)
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
      		 User.find(params[:id]).destroy
               flash[:success] = "User deleted"
               redirect_to users_url
-    	end	
+    	end
 
         def entries_follow
             @title = "Entries Following"

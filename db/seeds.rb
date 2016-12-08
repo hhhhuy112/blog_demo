@@ -1,3 +1,15 @@
+50.times do |c|
+  name  = Faker::Name.name
+  Category.create(name: name,)
+end
+
+categories = Category.order(:created_at).take(6)
+50.times do
+  content=Faker::Name.name
+  categories.each{|category| category.questions.create(content:content)}
+end
+
+
 User.create!(name:  "HuyMinh Ho",
              email: "minhhuyho@railstutorial.org",
              password:              "foobar",
@@ -34,7 +46,7 @@ users = User.order(:created_at).take(6)
 entry = Entry.first
 50.times do
   content = Faker::Lorem.sentence(5)
-  users.each { 
-    |user| user.comments.create!(content: content, entry_id: entry.id )  
+  users.each {
+    |user| user.comments.create!(content: content, entry_id: entry.id )
   }
 end

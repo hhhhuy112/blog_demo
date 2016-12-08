@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
 
   get 'sessions/new'
 
@@ -14,14 +14,23 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
 
   delete 'logout' => 'sessions#destroy'
-  
+
    resources :users do
     member do
       get :following, :followers, :entries_follow
     end
   end
   resources :entries
-  resources :comments  
-   resources :relationships,       only: [:create, :destroy]
+  resources :comments
+  resources :relationships,       only: [:create, :destroy]
+  resources :categories do
+    member do
+      get :search
+    end
+  end
+  resources :questions do
+    resources :answers
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
