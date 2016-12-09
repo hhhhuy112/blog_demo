@@ -1,8 +1,14 @@
-.modal-body {
+#areaAnswer {
    overflow-y: auto;
-   max-height: 400px;
+   max-height: 250px;
 }
 
 .validate-alert{
   display: none;
+}
+.show_category{
+border-left:2px, solid, black
+}
+.duplicate_nested_form{
+  padding-left:5px;
 }

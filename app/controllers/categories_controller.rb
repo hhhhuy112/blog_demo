@@ -2,14 +2,14 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   def index
     @categories=Category.paginate(per_page: 5, page: params[:page])
-    @cat=Category.new
+    @category=Category.new
   end
 
   def show
     @questions=@category.search(params[:search]).paginate(per_page: 6, page: params[:page])
     respond_to do |format|
       format.html
-      format.json
+      format.js
     end
   end
 
@@ -18,12 +18,12 @@ class CategoriesController < ApplicationController
 
   def create
     @categories=Category.paginate(per_page: 5, page: params[:page])
-    @cat=Category.new(category_params)
-    if @cat.save
+    @category=Category.new(category_params)
+    if @category.save
       flash[:success] = "Create category success!"
-      render "index"
+      redirect_to categories_url
     else
-      render "index"
+      render :index
     end
   end
 
@@ -31,13 +31,12 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    @category=Category.new()
-    if @category.save
+    if @category.update_attributes(category_params)
       flash[:success] = "Update category success"
       redirect_to @category
     else
       flash[:danger] = "Update category fail"
-      redirect_to request_referer
+      redirect_to @category
     end
   end
 

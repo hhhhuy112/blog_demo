@@ -1,16 +1,8 @@
-<div class="col-sm-4">
-  <div class="panel panel-primary ">
-    <div class="panel-heading">Question <%=question.id%></div>
-    <div class="panel-body">
-      <%=question.content%> ?
-    </div>
-    <div class="panel-footer ">
-      <%=link_to "Edit", question, class: "btn btn-info"%>
-      <%=link_to "Delete", question, method: :delete, data: { confirm: "Are you sure?" ,remote: true}, class: "btn btn-danger"%>
-      <span class="timestamp">
-        Posted <%= time_ago_in_words(@category.created_at) %> ago.
-      </span>
-
-    </div>
-  </div>
-</div>
+<tr>
+  <td><%= question.id %></td>
+  <td><%= link_to question.content, question %></td>
+  <td>
+      <%= link_to t("edit"), question, class: "btn btn-info" %>
+      <%= link_to t("delete"), question, method: :delete, data: { confirm: t("are_you_sure"), remote: true}, class: "btn btn-danger" %>
+  </td>
+</tr>

@@ -1,38 +1,38 @@
-<% provide(:title,"Categories")%>
-  <% if logged_in?&& current_user.admin?%>
-  <div class="row">
-    <aside class="col-md-4">
-      <section class="user_info">
-        <%= render 'shared/user_info' %>
+<% provide(:title, "Categories") %>
+<% if logged_in? && current_user.admin? %>
+  <div class = "row">
+    <aside class = "col-md-4">
+      <section class = "user_info">
+        <%= render "shared/user_info" %>
       </section>
-      <section class="stats">
-        <%= render 'shared/stats' %>
+      <section class = "stats">
+        <%= render "shared/stats" %>
       </section>
-      <section class="micropost_form">
-        <%= render 'shared/category_form'%>
+      <section class = "micropost_form">
+        <%= render "shared/category_form" %>
       </section>
     </aside>
-     <div class="col-md-8 table-responsive">
-    <% else %>
-   <div class="col-md-8 col-md-offset-2 table-responsive">
-    <%end%>
-      <table class="table table-striped table-bordered">
+    <div class = "col-md-8 table-responsive">
+      <table class = "table table-striped table-bordered">
         <thead>
           <tr>
-            <th>#id</th>
-            <th>Name</th>
-            <th>Action</th>
+            <th><%= t "table_th_id" %></th>
+            <th><%= t "table_th_name" %></th>
+            <th><%= t "table_th_action" %></th>
           </tr>
-      </thead>
-      <tbody>
-        <h3>Categories (<%=Category.count%>)</h3>
+        </thead>
+        <tbody>
+          <h3>
+            <%= t "(" %>
+            <%= pluralize(Category.count, t("category")) %>
+            <%= t ")" %>
+          </h3>
           <%= render @categories%>
-
         </tbody>
       </table>
-        <%= will_paginate @categories %>
+      <%= will_paginate @categories %>
     </div>
-
   </div>
+<% end %>
 
 

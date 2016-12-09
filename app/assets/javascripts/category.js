@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+$(document).on('ready page:load', function(event) {
 
      $(".show_category .btn-question").click(function(){
         $(".btn-add-question").attr("disabled","disabled");
@@ -64,13 +64,10 @@ $( document ).ready(function() {
         return false;
     });
 
-   $(".show_category #categories_search input").keyup(function() {
-    $.get($(".show_category #categories_search").attr("action"), $(".show_category #categories_search").serialize(),null, "script");
-    return false;
+    $(document).on("keyup",".show_category #categories_search input", function (event) {
+      $.get($(".show_category #categories_search").attr("action"), $(".show_category #categories_search").serialize(),null, "script");
+      return false;
   });
-
-
-
 });
 
 
