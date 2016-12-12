@@ -1,0 +1,82 @@
+<% provide(:title, "Question") %>
+<div class="show-question row">
+  <h2><%= @question.category.name %></h2>
+  <div class="row">
+    <%= form_for @question do |f|%>
+      <div class="field">
+        <%= f.label :content, "Question" %>
+        <%= f.text_field :content, class: "form-control" %>
+      </div>
+      <h2 class="number-answers">Answer(<%= @question.answers.count %>)</h2>
+      <div id="area_answer">
+        <%= f.fields_for :answers do |answer|%>
+          <%=render "answer_fields" ,f: answer%>
+        <%end%>
+      </div>
+      <div class="action-show-question">
+        <%= link_to "Add Answer","javascript:void(0)", class: "duplicate_nested_form_show_question btn btn-info col-md-3 col-md-offset-3"%>
+        <%= f.submit t("submit"), class: " btn-edit-question btn btn-primary col-md-3" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    nestedForm = $(".duplicatable_nested_form_show_question").last().clone()
+
+    $(document).on( "click","a.destroy_duplicate_nested_form_show-question[disabled!=disabled]" , function(){
+      $(this).prev().val("true");
+      $(this).closest(".duplicatable_nested_form_show_question").slideUp();
+      setNumberAnswer();
+      validateSelectAnswer();
+    });
+
+    $(document).on( "click",".duplicate_nested_form_show_question" , function(){
+      formsOnPage    = $(".duplicatable_nested_form_show_question").length;
+      newNestedForm  = $(nestedForm).clone();
+      $(newNestedForm).find("label").each(function(){
+        oldLabel = $(this).attr ('for');
+        newLabel = oldLabel.replace(new RegExp(/[0-99]/), formsOnPage);
+        $(this).attr ('for', newLabel);
+      });
+
+      $(newNestedForm).find("input").each(function(){
+        $(this).val(" ");
+        if($(this).attr("class")=="value_detroy_show_question"){
+          $(this).val("false");
+        }
+        if($(this).attr("class")=="is_correct_show_question"){
+          $(this).val("false");
+        }
+        if($(this).attr("class")=="select_answer_input"){
+          $(this).removeAttr("checked");
+        }
+
+        oldId = $(this).attr ('id');
+        newId = oldId.replace(new RegExp(/[0-99]/), formsOnPage);
+        $(this).attr ('id', newId);
+        oldName = $(this).attr ('name');
+        newName = oldName.replace(new RegExp(/\[[0-99]+\]/), "["+formsOnPage+"]");
+        $(this).attr ('name', newName);
+      });
+      $(newNestedForm).find(".destroy_duplicate_nested_form_show-question").removeAttr("disabled");
+      $( "#area_answer").append( newNestedForm);
+      setNumberAnswer();
+    });
+
+    $(document).on("click",".select_answer_input", function(){
+      $(".is_correct_show_question").val("false");
+      $(this).next().val("true");
+      $(".destroy_duplicate_nested_form_show-question").removeAttr("disabled", "disabled");
+      $(this).nextAll(".destroy_duplicate_nested_form_show-question").attr("disabled", "disabled");
+    });
+
+    function setNumberAnswer(){
+      numberAnswer=$(".duplicatable_nested_form_show_question .value_detroy_show_question[value=false]").length;
+      $(".show-question .number-answers").html("Answer("+numberAnswer+")");
+    }
+  });
+
+</script>
+

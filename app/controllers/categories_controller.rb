@@ -1,12 +1,16 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   def index
-    @categories=Category.paginate(per_page: 5, page: params[:page])
+    @categories=Category.search_categories(params[:search]).paginate(per_page: 5, page: params[:page])
     @category=Category.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
-    @questions=@category.search(params[:search]).paginate(per_page: 6, page: params[:page])
+    @questions=@category.search_questions(params[:search]).paginate(per_page: 5, page: params[:page])
     respond_to do |format|
       format.html
       format.js
@@ -43,10 +47,15 @@ class CategoriesController < ApplicationController
   def  destroy
     if @category.destroy
       flash[:success] = "Destroy category success"
-      redirect_to categories_url
+      respond_to do |format|
+        format.html { redirect_to categories_url}
+      end
+
     else
       flash[:danger] = "Destroy category fail"
-      redirect_to categories_url
+      respond_to do |format|
+        format.html { redirect_to categories_url}
+      end
     end
   end
 

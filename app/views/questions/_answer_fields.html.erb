@@ -1,0 +1,14 @@
+<div class="duplicatable_nested_form_show_question col-md-8 col-md-offset-2">
+  <%= f.label :content %>
+  <%= f.text_field :content, class: "form-control content_show_question" %>
+  <%= f.label :is_correct, "is Correct" %>
+  <%=radio_button_tag 'select_answer', "is_correct", f.object.is_correct, class: "select_answer_input"%>
+  <%= f.hidden_field :is_correct, class: "is_correct_show_question" %>
+  <%= f.hidden_field :_destroy , class: "value_detroy_show_question" %>
+  <% if f.object.is_correct== true %>
+  <%= link_to "Remove ","javascript:void(0)", class: "destroy_duplicate_nested_form_show-question btn btn-danger", disabled: "true"  %>
+  <% else %>
+  <%= link_to "Remove ","javascript:void(0)", class: "destroy_duplicate_nested_form_show-question btn btn-danger" %>
+  <% end %>
+</div>
+

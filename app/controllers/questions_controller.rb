@@ -1,5 +1,14 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
+  def index
+    @questions=Question.filter(params[:category_id], params[:search]).paginate(per_page: 5, page: params[:page])
+    @categories=Category.all
+    respond_to do |format|
+        format.html
+        format.js
+    end
+  end
+
   def new
   end
 
@@ -19,7 +28,13 @@ class QuestionsController < ApplicationController
   end
 
   def update
-
+    if @question.update(question_params)
+      flash[:success] = "Update question success"
+      redirect_to @question
+    else
+      flash[:danger] = "Update question fail"
+      render :show
+    end
   end
 
   def destroy
@@ -39,7 +54,7 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-    params.require(:question).permit(:category_id, :content, answers_attributes: [ :content, :is_correct, :_destroy ])
+    params.require(:question).permit(:category_id, :content, answers_attributes: [:id, :content, :is_correct, :_destroy])
   end
 
   def set_question

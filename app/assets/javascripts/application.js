@@ -15,4 +15,5 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
-//= require category
+//= require categories_index
+//= require categories_show

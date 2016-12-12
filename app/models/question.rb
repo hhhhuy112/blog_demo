@@ -8,4 +8,16 @@ class Question < ApplicationRecord
 
   validates :answers, presence:true
   validates :content, presence:true
+
+  def self.filter(category_id,search)
+    query="1"
+    if category_id
+      query += " AND category_id = " + category_id
+    end
+
+    if search
+      query += " AND content LIKE '%#{search}%' "
+    end
+    where( query)
+  end
 end

@@ -1,4 +1,14 @@
-// Place all the styles related to the Questions controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.show-question .action-show-question{
+  margin-top: 10px
+}
+.btn-edit-question{
+  margin-left:5px;
+}
+.show-question > h2{
+  font-size: 40px;
+}
+#area_answer{
+ overflow-y: auto;
+ max-height: 300px;
+}
 

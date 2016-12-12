@@ -23,11 +23,7 @@ Rails.application.routes.draw do
   resources :entries
   resources :comments
   resources :relationships,       only: [:create, :destroy]
-  resources :categories do
-    member do
-      get :search
-    end
-  end
+  resources :categories
   resources :questions do
     resources :answers
   end

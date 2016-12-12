@@ -1,0 +1,3 @@
+$("tbody").html("<%= j render @categories %>");
+$("#pag").html("<%= j will_paginate @categories %>");
+$(".number-categories").html("( <%= pluralize(@categories.count, 'categories') %> )");

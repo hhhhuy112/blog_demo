@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 20161206075328) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "content"
-    t.string   "is_correct"
+    t.boolean  "is_correct"
     t.integer  "question_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
